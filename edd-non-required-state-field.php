@@ -1,12 +1,13 @@
 <?php
 /**
- * Plugin Name: Daan - Strip DB Dump
- * Description: Adds shorthands in WP-CLI to easily create database dumps without sensitive data, i.e. customers, users and/or orders.
- * Version: 1.1.4
+ * Plugin Name: Easy Digital Downloads - Non Required State Field
+ * Description: Dynamically detect if State should be a required field, based on the selected Country.
+ * Version: 1.0.0
  * Author: Daan from Daan.dev
- * GitHub Plugin URI: Dan0sz/strip-db-dump
- * Primary Branch: main
- * License: GPLv2 or later
+ * Author URI: https://daan.dev
+ * GitHub Plugin URI: Dan0sz/non-required-state-field
+ * Primary Branch: master
+ * License: MIT
  */
 
 require_once __DIR__ . '/vendor/autoload.php';

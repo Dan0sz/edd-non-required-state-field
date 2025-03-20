@@ -1,6 +1,6 @@
 {
     "name": "daan/edd-non-required-state-field",
-    "description": "Makes the state field optional for certain countries in Easy Digital Downloads.",
+    "description": "Dynamically detect if State should be a required field, based on the selected Country.",
     "type": "wordpress-plugin",
     "license": "MIT",
     "autoload": {
