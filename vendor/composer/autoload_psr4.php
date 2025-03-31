@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Daan\\EddNonRequiredStateField\\' => array($baseDir . '/src'),
+    'Daan\\EDD\\NonReqStateField\\' => array($baseDir . '/src'),
 );

@@ -9,12 +9,12 @@ class ComposerStaticInitcd328eb63e8cd174003988e3011ee325
     public static $prefixLengthsPsr4 = array (
         'D' => 
         array (
-            'Daan\\EddNonRequiredStateField\\' => 30,
+            'Daan\\EDD\\NonReqStateField\\' => 26,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Daan\\EddNonRequiredStateField\\' => 
+        'Daan\\EDD\\NonReqStateField\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
