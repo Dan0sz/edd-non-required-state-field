@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Easy Digital Downloads - Non Required State Field
  * Description: Dynamically detect if State should be a required field, based on the selected Country.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Daan from Daan.dev
  * Author URI: https://daan.dev
  * GitHub Plugin URI: Dan0sz/non-required-state-field
