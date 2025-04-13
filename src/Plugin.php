@@ -7,6 +7,8 @@
 
 namespace Daan\EDD\NonReqStateField;
 
+use EDD_Customer;
+
 class Plugin {
 	/**
 	 * Contains all country codes for countries with a predefined list of states.
@@ -17,30 +19,13 @@ class Plugin {
 	 */
 	private $required_countries = [
 		'US',
-		'AO',
 		'CA',
 		'AU',
-		'BD',
-		'BG',
-		'BR',
 		'CN',
-		'GB',
-		'HK',
-		'HU',
-		'ID',
-		'IN',
-		'IR',
-		'IT',
-		'JP',
+		'BR',
 		'MX',
 		'MY',
-		'NP',
 		'NZ',
-		'PE',
-		'TH',
-		'TR',
-		'ZA',
-		'ES',
 	];
 
 	/**
@@ -68,6 +53,27 @@ class Plugin {
 	public function remove_state_from_required_fields( $fields ) {
 		$country = sanitize_text_field( $_POST[ 'billing_country' ] ?? '' );
 
+		// User just entered checkout. If logged in, let's check if a primary address is set and use that country.
+		if ( empty( $country ) ) {
+			if ( is_user_logged_in() ) {
+				$customer = new EDD_Customer( get_current_user_id(), true );
+				$address  = $customer->get_address();
+
+				if ( $address ) {
+					$country = $address->country;
+				}
+			}
+		}
+
+		/**
+		 * If at this point, $country is still empty. Let's just use the fallback option, because that'll be what the checkout is set to by default.
+		 *
+		 * @TODO If I ever want to use EDD Pro's geolocation option, I'll have to add another fix for that in here.
+		 */
+		if ( empty( $country ) ) {
+			$country = edd_get_option( 'base_country', 'US' );
+		}
+
 		if ( in_array( $country, $this->required_countries ) ) {
 			return $fields;
 		}
@@ -89,7 +95,7 @@ class Plugin {
 		?>
         <script>
             jQuery(document).ready(function ($) {
-                var daan_edd = {
+                let daan_edd_nrs = {
                     required_countries: <?= json_encode( $this->required_countries ); ?>,
 
                     /**
@@ -123,7 +129,7 @@ class Plugin {
                         let $card_state_label = $('#edd-card-state-wrap label');
 
 
-                        if (daan_edd.required_countries.includes($billing_country)) {
+                        if (daan_edd_nrs.required_countries.includes($billing_country)) {
                             if ($required_indicator.length === 0) {
                                 $card_state_label.append('<span class="edd-required-indicator">*</span>');
                             }
@@ -138,7 +144,7 @@ class Plugin {
                     }
                 };
 
-                daan_edd.init();
+                daan_edd_nrs.init();
             });
         </script>
         <style>
